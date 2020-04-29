@@ -65,3 +65,14 @@ Render.run(render);
 setInterval(()=>{
     Body.applyForce( headMass, {x: headMass.position.x, y: headMass.position.y},{x: 0.005, y: 0});
 },3000);
+
+setInterval(()=>{
+    var text_angle= document.getElementById("angle");  
+    var head_x = headMass.position.x,
+        head_y = headMass.position.y,
+        bottom_x = bottomMass.position.x,
+        bottom_y = bottomMass.position.y
+    
+    pendulum_angle =  Math.atan2(bottom_x - head_x,bottom_y - head_y)* 180/Math.PI
+    text_angle.innerHTML= pendulum_angle.toFixed(2); 
+},30);
