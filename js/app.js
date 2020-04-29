@@ -12,7 +12,7 @@ var Engine = Matter.Engine;
 var engine = Engine.create();
 
 var render = Render.create({
-    element: document.body,
+    element: document.getElementById("stage"),
     engine: engine,
     options: {
       width: 800,
