@@ -69,10 +69,19 @@ setInterval(()=>{
 setInterval(()=>{
     var text_angle= document.getElementById("angle");  
     var head_x = headMass.position.x,
-        head_y = headMass.position.y,
+    head_y = headMass.position.y,
         bottom_x = bottomMass.position.x,
         bottom_y = bottomMass.position.y
     
-    pendulum_angle =  Math.atan2(bottom_x - head_x,bottom_y - head_y)* 180/Math.PI
-    text_angle.innerHTML= pendulum_angle.toFixed(2); 
+        pendulum_angle =  Math.atan2(bottom_x - head_x,bottom_y - head_y)* 180/Math.PI
+        text_angle.innerHTML= pendulum_angle.toFixed(2); 
+        
+    // PID
+    kp = 0.001
+
+    f = -1 * kp * pendulum_angle
+    Body.applyForce( bottomMass, {x: bottomMass.position.x, y: bottomMass.position.y},{x: f, y: 0});
+
 },30);
+
+
