@@ -52,29 +52,14 @@ mouseConstraint = MouseConstraint.create(engine, {
     // isStatic:静的(完全固定)
 var ground = Bodies.rectangle(400, 610, 500, 60, { isStatic: true });
 
-var over_wall = Bodies.rectangle(400, 100, 1000, 20, { isStatic: true });
-var under_wall = Bodies.rectangle(400, 700, 1000, 20, { isStatic: true });
-var left_wall = Bodies.rectangle(100, 450, 20, 1000, { isStatic: true });
-var right_wall = Bodies.rectangle(700, 450, 20, 1000, { isStatic: true });
 
 // 二つの箱(四角)と地面を追加
-World.add(engine.world, [mouseConstraint ,ground, over_wall, under_wall, left_wall, right_wall]);
+World.add(engine.world, [mouseConstraint ,ground]);
 
-
-
-var bottomId = bottomMass.id
-var underWallId = under_wall.id
 // an example of using collisionActive event on an engine
 Events.on(engine, 'collisionActive', function(event) {
     var timing = event.source.timing.timestamp
-    for(var i = 0;i < event.pairs.length;i++){
-        if(event.pairs[i].bodyA.id == bottomId & event.pairs[i].bodyB.id == underWallId){
-            console.log('reset')
-
-        }
-    }
 });
-
 
 
 // Matter.js エンジン起動
@@ -100,6 +85,8 @@ setInterval(()=>{
 
     f = -1 * kp * pendulum_angle
     Body.applyForce( bottomMass, {x: bottomMass.position.x, y: bottomMass.position.y},{x: f, y: 0});
+
+    
 
 },30);
 
