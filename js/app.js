@@ -85,9 +85,24 @@ setInterval(()=>{
 
     f = -1 * kp * pendulum_angle
     Body.applyForce( bottomMass, {x: bottomMass.position.x, y: bottomMass.position.y},{x: f, y: 0});
-
     
-
 },30);
 
 
+setInterval(()=>{
+    if(bottomMass.position.y > 800){
+        console.log('reset')
+    
+        World.remove(engine.world, [headMass, bottomMass, constraint]);
+        headMass = Bodies.circle(400, 300, 20);
+        bottomMass = Bodies.circle(400, 500, 20);
+    
+        constraint = Constraint.create({
+            bodyA: headMass,
+            bodyB: bottomMass,
+            pointA: { x: 0, y: 0 },
+            pointB: { x: 0, y: 0 }
+        });
+        World.add(engine.world, [headMass, bottomMass, constraint]);
+    }
+},100);
